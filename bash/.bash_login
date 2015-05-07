@@ -1,0 +1,2 @@
+python /home/lgoodridge/scripts/choose_background.py
+export PATH="$HOME/node_modules/.bin:$PATH"
