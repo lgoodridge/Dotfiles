@@ -1,2 +1,5 @@
 python /home/lgoodridge/scripts/choose_background.py
 export PATH="$HOME/node_modules/.bin:$PATH"
+
+# OPAM configuration
+. /home/lgoodridge/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true

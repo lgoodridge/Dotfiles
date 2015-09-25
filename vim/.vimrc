@@ -37,7 +37,9 @@ autocmd bufenter * if (winnr("$") == 1 &&
 \ | q | endif
 
 " Notes Options "
-let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes']
+let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
+\ '~/git/Personal-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes', 
+\ '~/git/Personal-Projects/cos326/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
@@ -47,6 +49,11 @@ let g:syntastic_quiet_messages={"level": "warnings"}
 let g:syntastic_quiet_messages={"type": "style"}
 let g:syntastic_warning_symbol = 'WW'
 let g:syntastic_error_symbol = 'EE'
+let g:syntastic_ocaml_checkers = ['merlin']
+
+" Merlin Options "
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " General Options  "
 set tabstop=4

@@ -1,0 +1,9 @@
+[user]
+	name = Lance Goodridge
+	email = ldgoodridge95@gmail.com
+[push]
+    default = simple
+[core]
+    editor = vim
+[github]
+    user = lgoodridge

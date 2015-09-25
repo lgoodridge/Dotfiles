@@ -113,6 +113,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Get OCaml to work
+eval `opam config env`
+
 # Get virtual env to work
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
@@ -174,7 +177,7 @@ export PATH=$PATH:$HOME/algs4/bin
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];
 then
-  export PS1='\[\e[1;32m\][\@ \u | \W]\[\e[m\] $ '
-else
   export PS1='\[\e[1;31m\][\@ \u | \W]\[\e[m\] $ '
+else
+  export PS1='\[\e[1;32m\][\@ \u | \W]\[\e[m\] $ '
 fi
