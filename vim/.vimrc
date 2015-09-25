@@ -69,8 +69,8 @@ set nu
 
 " Set visual options for gvim "
 if has('gui_running')
-    colorscheme desert
-	colorscheme denim-crush
+    colorscheme xoria256
+    colorscheme aptana
 	set guifont=Inconsolata\ Medium\ 11
 
 " Set visual options for console vim "
