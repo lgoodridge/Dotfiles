@@ -133,36 +133,31 @@ widget_defaults = dict(
     padding=3,
 )
 
-# Old Colors
-# Red: #FF2C2C
-# Green: #00DD0F
-# Blue: #2898FA
-
 screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.GroupBox(active="#AC9FD9",
-                                this_screen_border="#E07E2D",
-                                this_current_screen_border="#E07E2D"),
+                widget.GroupBox(active="#9393CC",
+                                this_screen_border="#CC9393",
+                                this_current_screen_border="#CC9393"),
                 widget.Sep(padding=10),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Sep(padding=10),
-                widget.CPUGraph(graph_color="#AC9FD9",
-                                fill_color=["#AC9FD9", "#001111"]),
+                widget.CPUGraph(graph_color="#9393CC",
+                                fill_color=["#9393CC", "#001111"]),
                 widget.Sep(padding=10),
-                widget.TextBox(text="Volume: ", foreground="#E07E2D"),
-                widget.Volume(foreground="#E07E2D"),
+                widget.TextBox(text="Volume: ", foreground="#CC9393"),
+                widget.Volume(foreground="#CC9393"),
                 widget.Sep(padding=10),
-                widget.TextBox(text="Battery: ", foreground="#AC9FD9"),
-                widget.Battery(format="{percent:2.0%}  {char}", discharge_char="~", foreground="#AC9FD9"),
-                widget.TextBox(text="Est Time Rem: ", foreground="#AC9FD9"),
-                widget.Battery(format="{hour:d}:{min:02d}", foreground="#AC9FD9"),
+                widget.TextBox(text="Battery: ", foreground="#8DCBE2"),
+                widget.Battery(format="{percent:2.0%}  {char}", discharge_char="~", foreground="#8DCBE2"),
+                widget.TextBox(text="Est Time Rem: ", foreground="#8DCBE2"),
+                widget.Battery(format="{hour:d}:{min:02d}", foreground="#8DCBE2"),
                 widget.Sep(padding=10),
                 widget.Systray(),
                 widget.Sep(padding=10),
-                widget.Clock(format='%Y-%m-%d %a %I:%M %p', foreground="#E07E2D"),
+                widget.Clock(format='%Y-%m-%d %a %I:%M %p', foreground="#CC9393"),
             ],
             30,
         ),
