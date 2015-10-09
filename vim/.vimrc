@@ -9,6 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'genutils'
 Plugin 'majutsushi/tagbar'
+Plugin 'paranoida/vim-airlineish'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -71,8 +72,8 @@ set nu
 if has('gui_running')
     colorscheme xoria256
     colorscheme aptana
-	set guifont=Inconsolata\ Medium\ 11
-
+    set guifont=Inconsolata\ for\ Powerline:h14
+    
 " Set visual options for console vim "
 else
 endif

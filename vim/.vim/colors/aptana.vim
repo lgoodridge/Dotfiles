@@ -32,19 +32,19 @@ exe "hi Cursor          guifg=" . t_white . " guibg=" . sel_bg
 exe "hi Visual          guifg=" . t_white . " guibg=" . sel_bg
 exe "hi Folded	        guifg=" . t_white . " guibg=" . t_white
 exe "hi FoldColumn	    guifg=" . t_white . " guibg=" . t_white
-exe "hi IncSearch	    guifg=" . t_white . " guibg=" . t_white
-exe "hi MatchParen      guifg=" . t_white . " guibg=" . t_white
+exe "hi IncSearch	    guifg=" . t_white . " guibg=" . sel_bg
+exe "hi MatchParen      guifg=" . t_white . " guibg=" . sel_bg
 exe "hi Question	    guifg=" . t_white . " guibg=" . t_white
-exe "hi Search	        guifg=" . t_white . " guibg=" . t_white
+exe "hi Search	        guifg=" . t_white . " guibg=" . sel_bg
 exe "hi SpecialKey	    guifg=" . t_white . " guibg=" . t_white
 exe "hi StatusLine	    guifg=" . t_white . " guibg=" . t_white
 exe "hi StatusLineNC    guifg=" . t_white . " guibg=" . t_white
-exe "hi Title	        guifg=" . t_oran  . " guibg=" . main_bg
+exe "hi Title	        guifg=" . t_red  . " guibg=" . main_bg
 exe "hi VertSplit	    guifg=" . main_bg . " guibg=" . t_grey
 
-exe "hi ModeMsg	    guifg=" . t_white
+exe "hi ModeMsg	    guifg=" . t_blue
 exe "hi MoreMsg	    guifg=" . t_white
-exe "hi WarningMsg	guifg=" . t_white
+exe "hi WarningMsg	guifg=" . t_red
 
 " syntax highlighting groups
 exe "hi Boolean         guifg=" . t_purp

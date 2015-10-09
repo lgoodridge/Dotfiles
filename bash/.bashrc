@@ -116,14 +116,6 @@ fi
 # Get OCaml to work
 eval `opam config env`
 
-# Get virtual env to work
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/bin/virtualenvwrapper.sh
-
-# Alias sublime
-alias sublime='subl'
-
 # Alias gcc217 from cos217
 alias gcc217='gcc -g -Wall -Wextra -Wno-unused-parameter -ansi -pedantic'
 
@@ -177,7 +169,7 @@ export PATH=$PATH:$HOME/algs4/bin
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];
 then
-  export PS1='\[\e[1;31m\][\@ \u | \W]\[\e[m\] $ '
+  export PS1='\[\e[0;31m\][\@ \u | \W]\[\e[m\] $ '
 else
-  export PS1='\[\e[1;32m\][\@ \u | \W]\[\e[m\] $ '
+  export PS1='\[\e[0;32m\][\@ \u | \W]\[\e[m\] $ '
 fi
