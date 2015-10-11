@@ -1,6 +1,6 @@
 " Set up Vundle "
-set nocompatible           
-filetype off                  
+set nocompatible
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
@@ -21,8 +21,8 @@ Plugin 'honza/vim-snippets'
 Plugin 'toyamarinyon/vim-swift'
 
 " Finish Vundle setup "
-call vundle#end()            
-filetype plugin indent on    
+call vundle#end()
+filetype plugin indent on
 
 " Airline Options "
 if has('gui_running')
@@ -33,13 +33,13 @@ if has('gui_running')
 endif
 
 " NERDTree Options "
-autocmd bufenter * if (winnr("$") == 1 && 
+autocmd bufenter * if (winnr("$") == 1 &&
 \ exists("b:NERDTreeType") && b:NERDTreeType == "primary")
 \ | q | endif
 
 " Notes Options "
 let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
-\ '~/git/Personal-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes', 
+\ '~/git/Personal-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes',
 \ '~/git/Personal-Projects/cos326/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
@@ -73,7 +73,7 @@ if has('gui_running')
     colorscheme xoria256
     colorscheme aptana
     set guifont=Inconsolata\ for\ Powerline:h14
-    
+
 " Set visual options for console vim "
 else
 endif
@@ -84,3 +84,12 @@ map <C-x> x
 map <C-v> P
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
+
+" Custom Functions "
+function! Strip_trailing_ws()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfunction
+command! -nargs=* StripTws call Strip_trailing_ws()
