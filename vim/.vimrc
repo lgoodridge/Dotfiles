@@ -40,7 +40,7 @@ autocmd bufenter * if (winnr("$") == 1 &&
 " Notes Options "
 let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
 \ '~/git/Personal-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes',
-\ '~/git/Personal-Projects/cos326/notes']
+\ '~/git/Personal-Projects/cos326/notes', '~/git/Personal-Projects/quadcopter/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
@@ -86,6 +86,8 @@ map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
 
 " Custom Functions "
+
+" Removes all trailing white space "
 function! Strip_trailing_ws()
     let l = line(".")
     let c = col(".")
@@ -93,3 +95,19 @@ function! Strip_trailing_ws()
     call cursor(l, c)
 endfunction
 command! -nargs=* StripTws call Strip_trailing_ws()
+
+" Replaces carriage returns with newlines "
+function! Replace_cr_newline()
+    let l = line(".")
+    let c = col(".")
+    %s/\r/\r/g
+    call cursor(l, c)
+endfunction
+
+" Replaces carriage returns with spaces "
+function! Replace_cr_space()
+    let l = line(".")
+    let c = col(".")
+    %s/\r/\ /g
+    call cursor(l, c)
+endfunction

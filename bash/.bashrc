@@ -154,6 +154,7 @@ nopen() {
 
 # SSH aliases
 alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.149.243.155'
+alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 
 # Other helpful aliases
 alias please='sudo "$BASH" -c "$(history -p !!)"'
