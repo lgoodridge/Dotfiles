@@ -39,8 +39,10 @@ autocmd bufenter * if (winnr("$") == 1 &&
 
 " Notes Options "
 let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
-\ '~/git/Personal-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes',
-\ '~/git/Personal-Projects/cos326/notes', '~/git/Personal-Projects/quadcopter/notes']
+\ '~/git/Old-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes',
+\ '~/git/Personal-Projects/cos326/notes', '~/git/Personal-Projects/cos398/notes',
+\ '~/git/Personal-Projects/cos461/notes', '~/git/Personal-Projects/cos432/notes',
+\ '~/git/Personal-Projects/quadcopter/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1

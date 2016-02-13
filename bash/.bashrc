@@ -113,24 +113,11 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# Get OCaml to work
-eval `opam config env`
-
 # Alias gcc217 from cos217
 alias gcc217='gcc -g -Wall -Wextra -Wno-unused-parameter -ansi -pedantic'
 
 # Alias feh backround setter
 alias sbg='feh --bg-scale'
-
-# Alias docker with sudo docker
-alias docker='sudo docker'
-
-# Alias docker stop all and remove all commands
-alias dstopall='docker stop $(docker ps -a -q)'
-alias dremoveall='docker rm $(docker ps -a -q)'
-
-# Alias atom with the correct location
-alias atom='sh ~/Dependencies/atom/atom/atom.sh'
 
 # Alias vim with GUI vim in terminal mode
 alias vim='gvim -v'
@@ -155,17 +142,10 @@ nopen() {
 # SSH aliases
 alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.149.243.155'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
+alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
 
 # Other helpful aliases
 alias please='sudo "$BASH" -c "$(history -p !!)"'
-
-# Temporary aliases
-alias pdfview='evince'
-alias sshpartyup='ssh -i ~/.aws/Lance.pem ubuntu@52.4.3.6'
-
-# Modify PATH
-export PATH="$HOME/node_modules/.bin:$PATH"
-export PATH=$PATH:$HOME/algs4/bin
 
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];
@@ -174,3 +154,25 @@ then
 else
   export PS1='\[\e[0;32m\][\@ \u | \W]\[\e[m\] $ '
 fi
+
+### MAC ONLY SECTION ###
+
+# Setup virtualenv
+source "/usr/local/bin/virtualenvwrapper.sh"
+
+# Setup Postgres
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
+export DATABASE_URL=postgres:///$(whoami)
+
+# Setup Go
+export GOPATH=$HOME/Documents/Go_workpsace
+
+# Setup OCaml
+eval `opam config env`
+
+### FEDORA ONLY SECTION ###
+
+# # Helpful aliases
+# alias pdfview='evince'
+
+### UBUNTU ONLY SECTION ###
