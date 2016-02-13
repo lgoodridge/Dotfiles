@@ -74,7 +74,6 @@ set nu
 if has('gui_running')
     colorscheme xoria256
     colorscheme aptana
-    set guifont=Inconsolata\ for\ Powerline:h14
 
 " Set visual options for console vim "
 else
@@ -113,3 +112,14 @@ function! Replace_cr_space()
     %s/\r/\ /g
     call cursor(l, c)
 endfunction
+
+
+" MAC Only "
+if has('gui_running')
+    set guifont=Inconsolata\ for\ Powerline:h14
+endif
+
+" Ubuntu Only "
+"if has('gui_running')
+"    set guifont=Ubuntu\ Mono\ 12
+"endif
