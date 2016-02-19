@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/home/lgoodridge/qtile'
 let g:netrw_dirhist_2='/usr/share/fonts/default/Type1'
 let g:netrw_dirhist_3='/etc/X11/fontpath.d/nethack'
 let g:netrw_dirhist_4='/usr/share/fonts/liberation'
+let g:netrw_dirhist_5='/Users/Lance/Dotfiles/vim/.vim/bundle/Vundle.vim'
