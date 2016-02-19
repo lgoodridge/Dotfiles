@@ -1,0 +1,6 @@
+# Ingore .vim/bundle
+bundle/
+
+# Ignore temp files
+~*
+.*.sw*
