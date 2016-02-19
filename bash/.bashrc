@@ -126,7 +126,7 @@ alias vim='gvim -v'
 cltmp() {
     find -name '*~' -delete
     find -name '\#*\#' -delete
-    find -name '*.swp' -delete
+    find -name '.*.sw*' -delete
 }
 
 # Alias vim notes commands
@@ -137,6 +137,12 @@ ndel() {
 }
 nopen() {
     gvim -c ":Note $*"
+}
+
+# Alias git hacks
+fix_gitignore() {
+    git rm -r --cached .
+    git add .
 }
 
 # SSH aliases
@@ -158,21 +164,21 @@ fi
 ### MAC ONLY SECTION ###
 
 # Setup virtualenv
-source "/usr/local/bin/virtualenvwrapper.sh"
+# source "/usr/local/bin/virtualenvwrapper.sh"
 
 # Setup Postgres
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
-export DATABASE_URL=postgres:///$(whoami)
+# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
+# export DATABASE_URL=postgres:///$(whoami)
 
 # Setup Go
-export GOPATH=$HOME/Documents/Go_workpsace
+# export GOPATH=$HOME/Documents/Go_workpsace
 
 # Setup OCaml
-eval `opam config env`
+# eval `opam config env`
 
 ### FEDORA ONLY SECTION ###
 
 # # Helpful aliases
-# alias pdfview='evince'
+alias pdfview='evince'
 
 ### UBUNTU ONLY SECTION ###
