@@ -1,5 +1,5 @@
 # Ingore .vim/bundle
-bundle/
+vim/.vim/bundle/
 
 # Ignore temp files
 ~*
