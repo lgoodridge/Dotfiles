@@ -113,6 +113,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# Get virtualenv prompt info
+function virtualenv_info(){
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        venv="${VIRTUAL_ENV##*/}"
+    else
+        venv=''
+    fi
+    [[ -n "$venv" ]] && echo "($venv) "
+}
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+VENV="\$(virtualenv_info)";
+
 # Alias gcc217 from cos217
 alias gcc217='gcc -g -Wall -Wextra -Wno-unused-parameter -ansi -pedantic'
 
@@ -144,16 +156,26 @@ alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.149.243.155'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
 
+# Pretty print JSON
+alias prettyjson='python -m json.tool'
+
 # Other helpful aliases
 alias please='sudo "$BASH" -c "$(history -p !!)"'
+alias spellcheck='aspell -t -c'
 
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];
 then
-  export PS1='\[\e[0;31m\][\@ \u | \W]\[\e[m\] $ '
+  export PS1="\[\e[0;31m\][\@ \u | \W]\[\e[m\] ${VENV}$ "
 else
-  export PS1='\[\e[0;32m\][\@ \u | \W]\[\e[m\] $ '
+  export PS1="\[\e[0;32m\][\@ \u | \W]\[\e[m\] ${VENV}$ "
 fi
+
+# Modify ls prompt
+LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
+LS_COLORS=$LS_COLORS:'ln=0;35:' ; export LS_COLORS
+LS_COLORS=$LS_COLORS:'ex=0;31:' ; export LS_COLORS
+
 
 ### MAC ONLY SECTION ###
 
@@ -169,6 +191,10 @@ export GOPATH=$HOME/Documents/Go_workpsace
 
 # Setup OCaml
 eval `opam config env`
+
+# Setup Tuhr
+export PYTHONPATH=$PYTHONPATH:/Users/Lance/git/tuhr/modules
+
 
 ### FEDORA ONLY SECTION ###
 

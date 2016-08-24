@@ -70,6 +70,9 @@ set expandtab
 set ruler
 set nu
 
+" Scroll before cursor reaches bottom of the screen "
+set scrolloff=10
+
 " Set visual options for gvim "
 if has('gui_running')
     colorscheme xoria256
@@ -85,6 +88,14 @@ map <C-x> x
 map <C-v> P
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
+map ; @
+inoremap <S-CR> <ESC>
+
+" Macros "
+let @f = "mfgg=G'f"
+let @c = "0i<!-- $a -->j"
+let @u = "0d5l$d4hj"
+
 
 " Custom Functions "
 
@@ -114,12 +125,31 @@ function! Replace_cr_space()
 endfunction
 
 
+" Auto commands "
+
+" Auto reload vimrc on change"
+augroup myvimrc
+    au!
+    au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
+"    \ | if has('gui_running') && filereadable($MYGVIMRC) | so $MYGVIMRC | endif
+augroup END
+
+
 " MAC Only "
+nnoremap ,v :e /Users/Lance/.vimrc<CR>
 if has('gui_running')
     set guifont=Inconsolata\ for\ Powerline:h14
 endif
 
 " Ubuntu Only "
-"if has('gui_running')
-"    set guifont=Ubuntu\ Mono\ 12
-"endif
+" nnoremap ,v :e ~/.vimrc<CR>
+" if has('gui_running')
+"     set guifont=Ubuntu\ Mono\ 12
+" endif
+
+" Windows Only "
+" nnoremap ,v :e C:\Users\lgoodrid\Documents\vim\_vimrc<CR>
+" cd C:\Users\lgoodrid\Desktop\Notes
+" if has('gui_running')
+"     set guifont=Consolas:h10:cANSI
+" endif
