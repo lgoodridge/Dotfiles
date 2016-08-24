@@ -89,8 +89,7 @@ alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
+# Alert alias for long running commands.
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # Alias definitions.
@@ -138,7 +137,7 @@ alias vim='gvim -v'
 cltmp() {
     find -name '*~' -delete
     find -name '\#*\#' -delete
-    find -name '*.swp' -delete
+    find -name '.*.sw*' -delete
 }
 
 # Alias vim notes commands
@@ -149,6 +148,12 @@ ndel() {
 }
 nopen() {
     gvim -c ":Note $*"
+}
+
+# Alias git hacks
+fix_gitignore() {
+    git rm -r --cached .
+    git add .
 }
 
 # SSH aliases
@@ -198,7 +203,7 @@ export PYTHONPATH=$PYTHONPATH:/Users/Lance/git/tuhr/modules
 
 ### FEDORA ONLY SECTION ###
 
-# # Helpful aliases
+# Helpful aliases
 # alias pdfview='evince'
 
 ### UBUNTU ONLY SECTION ###

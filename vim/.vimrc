@@ -136,10 +136,16 @@ augroup END
 
 
 " MAC Only "
-nnoremap ,v :e /Users/Lance/.vimrc<CR>
+nnoremap ,v :e ~/.vimrc<CR>
 if has('gui_running')
     set guifont=Inconsolata\ for\ Powerline:h14
 endif
+
+" Fedora Only "
+" nnoremap ,v :e ~/.vimrc<CR>
+" if has('gui_running')
+"     set guifont=Inconsolata\ Medium\ 11
+" endif
 
 " Ubuntu Only "
 " nnoremap ,v :e ~/.vimrc<CR>
