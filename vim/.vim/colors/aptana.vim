@@ -31,15 +31,15 @@ exe "hi LineNr   guifg=" . t_grey  . " guibg=" . main_bg
 " highlight groups
 exe "hi Cursor          guifg=" . t_white . " guibg=" . sel_bg
 exe "hi Visual          guifg=" . t_white . " guibg=" . sel_bg
-exe "hi Folded	        guifg=" . t_white . " guibg=" . t_white
-exe "hi FoldColumn	    guifg=" . t_white . " guibg=" . t_white
+exe "hi Folded	        guifg=" . t_white . " guibg=" . main_bg 
+exe "hi FoldColumn	    guifg=" . t_white . " guibg=" . main_bg 
 exe "hi IncSearch	    guifg=" . t_white . " guibg=" . spec_bg
 exe "hi MatchParen      guifg=" . t_white . " guibg=" . spec_bg
-exe "hi Question	    guifg=" . t_white . " guibg=" . t_white
+exe "hi Question	    guifg=" . t_white . " guibg=" . main_bg 
 exe "hi Search	        guifg=" . t_white . " guibg=" . spec_bg
-exe "hi SpecialKey	    guifg=" . t_white . " guibg=" . t_white
-exe "hi StatusLine	    guifg=" . t_white . " guibg=" . t_white
-exe "hi StatusLineNC    guifg=" . t_white . " guibg=" . t_white
+exe "hi SpecialKey	    guifg=" . t_white . " guibg=" . main_bg 
+exe "hi StatusLine	    guifg=" . t_white . " guibg=" . main_bg 
+exe "hi StatusLineNC    guifg=" . t_white . " guibg=" . main_bg 
 exe "hi Title	        guifg=" . t_red   . " guibg=" . main_bg
 exe "hi VertSplit	    guifg=" . main_bg . " guibg=" . t_grey
 

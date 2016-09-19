@@ -197,9 +197,6 @@ export GOPATH=$HOME/Documents/Go_workpsace
 # Setup OCaml
 eval `opam config env`
 
-# Setup Tuhr
-export PYTHONPATH=$PYTHONPATH:/Users/Lance/git/tuhr/modules
-
 
 ### FEDORA ONLY SECTION ###
 

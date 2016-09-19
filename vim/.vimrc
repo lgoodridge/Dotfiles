@@ -7,10 +7,12 @@ Plugin 'gmarik/Vundle.vim'
 
 " Added plugins "
 Plugin 'bling/vim-airline'
+Plugin 'fatih/vim-go'
 Plugin 'genutils'
 Plugin 'majutsushi/tagbar'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tclem/vim-arduino'
@@ -37,11 +39,17 @@ autocmd bufenter * if (winnr("$") == 1 &&
 \ exists("b:NERDTreeType") && b:NERDTreeType == "primary")
 \ | q | endif
 
+" Tagbar Options "
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_width=30
+
 " Notes Options "
 let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
-\ '~/git/Old-Projects/cos226/notes', '~/git/Personal-Projects/cos318/notes',
-\ '~/git/Personal-Projects/cos326/notes', '~/git/Personal-Projects/cos398/notes',
-\ '~/git/Personal-Projects/cos461/notes', '~/git/Personal-Projects/cos432/notes',
+\ '~/git/Old-Projects/cos226/notes', '~/git/Old-Projects/cos318/notes',
+\ '~/git/Old-Projects/cos326/notes', '~/git/Personal-Projects/cos398/notes',
+\ '~/git/Old-Projects/cos432/notes', '~/git/Old-Projects/cos461/notes',
+\ '~/git/Personal-Projects/cos418/notes', '~/git/Personal-Projects/cos498/notes',
+\ '~/git/Personal-Projects/cos516/notes',
 \ '~/git/Personal-Projects/quadcopter/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
@@ -58,6 +66,17 @@ let g:syntastic_ocaml_checkers = ['merlin']
 let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+" Vim Go Options "
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+
 " General Options  "
 set tabstop=4
 set shiftwidth=4
@@ -71,7 +90,7 @@ set ruler
 set nu
 
 " Scroll before cursor reaches bottom of the screen "
-set scrolloff=10
+set scrolloff=8
 
 " Set visual options for gvim "
 if has('gui_running')
@@ -83,13 +102,25 @@ else
 endif
 
 " Key Mappings "
+let mapleader=" "
 map <C-c> y
 map <C-x> x
 map <C-v> P
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
 map ; @
+map <Leader>j }
+map <Leader>k {
+map <Leader>w <C-w>
 inoremap <S-CR> <ESC>
+
+" Go-specific key mappings "
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap <Leader>c <Plug>(go-coverage)
+au Filetype go nmap <Leader>d <Plug>(go-doc)
+au Filetype go nmap <Leader>i <Plug>(go-info)
 
 " Macros "
 let @f = "mfgg=G'f"
@@ -137,6 +168,7 @@ augroup END
 
 " MAC Only "
 nnoremap ,v :e ~/.vimrc<CR>
+nnoremap ,b :e ~/.bashrc<CR>
 if has('gui_running')
     set guifont=Inconsolata\ for\ Powerline:h14
 endif
