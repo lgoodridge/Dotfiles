@@ -1,7 +1,7 @@
 " Xuphoria
 " Dark, faded, 'cool' color scheme
 " Author: Lance Goodridge
-" Inspired by NightLion Aptana Eclipse Theme
+" Inspired by xoria256 Theme
 
 let g:colors_name="xuphoria"
 
