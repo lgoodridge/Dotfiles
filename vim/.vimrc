@@ -12,6 +12,9 @@ Plugin 'genutils'
 Plugin 'majutsushi/tagbar'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'Raimondi/delimitMate'
+Plugin 'shougo/neocomplete'
+Plugin 'shougo/neosnippet'
+Plugin 'shougo/neosnippet-snippets'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -33,6 +36,67 @@ if has('gui_running')
 	let g:airline_powerline_fonts=1
     let g:airline#extensions#hunks#enabled = 1
 endif
+
+" Neocomplete Options "
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 0
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#source#synatx#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_patter = '\*ku\*'
+
+" Neocomplete dictionary and keywords "
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+        \ }
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Neocomplete omni completion "
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+
+" Neocomplete key mappings "
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+
+" Neosnippets options "
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
+endif
+
+" Neosnippets key mappings "
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+inoremap <silent> <CR> <C-r>=<SID>ExpandSnippetOrReturnEmptyString()<CR>
+function! s:ExpandSnippetOrReturnEmptyString()
+    if pumvisible()
+        if neosnippet#expandable()
+            return "\<Plug>(neosnippet_expand)"
+        else
+            return "\<C-y>\<CR>"
+        endif
+    else
+        return "\<CR>"
+endfunction
+
+" Neosnippets tab display / cycle "
+inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
 " NERDTree Options "
 autocmd bufenter * if (winnr("$") == 1 &&
@@ -67,6 +131,7 @@ let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Vim Go Options "
+let g:go_def_mapping_enabled = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -95,17 +160,18 @@ set scrolloff=8
 " Set visual options for gvim "
 if has('gui_running')
     colorscheme xoria256
-    colorscheme aptana
+    colorscheme xuphoria
 
 " Set visual options for console vim "
 else
 endif
 
-" Key Mappings "
+" General Key Mappings "
 let mapleader=" "
 map <C-c> y
 map <C-x> x
 map <C-v> P
+map <C-a> :NeoCompleteToggle<CR>
 map <C-n> :NERDTreeToggle<CR>
 map <C-t> :TagbarToggle<CR>
 map ; @
@@ -121,6 +187,7 @@ au FileType go nmap <Leader>t <Plug>(go-test)
 au FileType go nmap <Leader>c <Plug>(go-coverage)
 au Filetype go nmap <Leader>d <Plug>(go-doc)
 au Filetype go nmap <Leader>i <Plug>(go-info)
+au Filetype go nmap <Leader>v <Plug>(go-vet)
 
 " Macros "
 let @f = "mfgg=G'f"
