@@ -3,7 +3,7 @@
 " Author: Lance Goodridge
 " Inspired by NightLion Aptana Eclipse Theme
 
-let g:colors_name="aptana"
+let g:colors_name="xuphoria"
 
 " Define Theme Colors
 let main_bg = "#101010"
