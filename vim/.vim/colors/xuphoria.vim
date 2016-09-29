@@ -13,7 +13,7 @@ let spec_bg = "#505050"
 let t_white = "#E2E2E2"
 let t_grey  = "#A0A0A0"
 let t_dgrey = "#929292"
-let t_beige = "#D0D0D0"
+let t_beige = "#D8D8D8"
 
 let t_red   = "#DF8787"
 let t_blue  = "#87AFDF"
