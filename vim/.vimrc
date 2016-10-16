@@ -142,6 +142,9 @@ let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
 
+" Latex Options "
+let g:tex_conceal = ""
+
 " General Options  "
 set tabstop=4
 set shiftwidth=4

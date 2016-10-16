@@ -157,9 +157,10 @@ fix_gitignore() {
 }
 
 # SSH aliases
-alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.149.243.155'
+alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.218.216.39'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
+alias sshcycles='ssh -X lanceg@cycles.cs.princeton.edu'
 
 # Pretty print JSON
 alias prettyjson='python -m json.tool'
