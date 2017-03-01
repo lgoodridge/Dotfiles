@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -84,10 +84,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# some more ls aliases
-alias ll='ls -ahlF'
-alias la='ls -A'
-alias l='ls -CF'
+# Force colors for grep
+alias grep='egrep --color=always'
 
 # Alert alias for long running commands.
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
@@ -124,14 +122,11 @@ function virtualenv_info(){
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 VENV="\$(virtualenv_info)";
 
-# Alias gcc217 from cos217
-alias gcc217='gcc -g -Wall -Wextra -Wno-unused-parameter -ansi -pedantic'
-
 # Alias feh backround setter
 alias sbg='feh --bg-scale'
 
 # Alias vim with GUI vim in terminal mode
-alias vim='gvim -v'
+# alias vim='gvim -v'
 
 # Alias cltmp to clean temp files
 cltmp() {
@@ -161,6 +156,8 @@ alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.218.216.39'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
 alias sshcycles='ssh -X lanceg@cycles.cs.princeton.edu'
+alias sshcslab='ssh -X lanceg@courselab.cs.princeton.edu'
+alias sshdave='ssh -i ~/.ssh/pcs_rsa dave@23.239.12.110'
 
 # Pretty print JSON
 alias prettyjson='python -m json.tool'
@@ -198,6 +195,8 @@ export GOPATH=$HOME/Documents/Go_workpsace
 # Setup OCaml
 eval `opam config env`
 
+# Setup ARM Toolchain
+export PATH=$PATH:/usr/local/gcc_arm/gcc-arm-none-eabi-5_4-2016q3/bin/
 
 ### FEDORA ONLY SECTION ###
 

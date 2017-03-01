@@ -31,9 +31,9 @@ filetype plugin indent on
 
 " Airline Options "
 if has('gui_running')
-	set laststatus=2
-	let g:airline_theme='airlineish'
-	let g:airline_powerline_fonts=1
+    set laststatus=2
+    let g:airline_theme='airlineish'
+    let g:airline_powerline_fonts=1
     let g:airline#extensions#hunks#enabled = 1
 endif
 
@@ -108,13 +108,14 @@ let g:tagbar_ctags_bin='/usr/local/bin/ctags'
 let g:tagbar_width=30
 
 " Notes Options "
-let g:notes_directories = ['~/git/Personal-Projects/notes', '~/Notes',
-\ '~/git/Old-Projects/cos226/notes', '~/git/Old-Projects/cos318/notes',
-\ '~/git/Old-Projects/cos326/notes', '~/git/Personal-Projects/cos398/notes',
-\ '~/git/Old-Projects/cos432/notes', '~/git/Old-Projects/cos461/notes',
-\ '~/git/Personal-Projects/cos418/notes', '~/git/Personal-Projects/cos498/notes',
-\ '~/git/Personal-Projects/cos516/notes',
-\ '~/git/Personal-Projects/quadcopter/notes']
+let g:notes_directories = ['~/Notes',     '~/git/Personal-Projects/notes',
+\ '~/git/Old-Projects/cos226/notes',      '~/git/Old-Projects/cos318/notes',
+\ '~/git/Personal-Projects/cos320/notes', '~/git/Old-Projects/cos326/notes',
+\ '~/git/Personal-Projects/cos398/notes', '~/git/Old-Projects/cos418/notes',
+\ '~/git/Old-Projects/cos432/notes',      '~/git/Old-Projects/cos461/notes',
+\ '~/git/Personal-Projects/cos498/notes', '~/git/Old-Projects/cos516/notes',
+\ '~/git/Personal-Projects/cos518/notes', '~/git/Personal-Projects/neu202/notes',
+\ '~/git/Old-Projects/quadcopter/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
@@ -157,6 +158,12 @@ set expandtab
 set ruler
 set nu
 
+" Fix backspace
+set backspace=indent,eol,start
+
+" Enable mouse use in all modes "
+set mouse=a
+
 " Scroll before cursor reaches bottom of the screen "
 set scrolloff=8
 
@@ -167,6 +174,9 @@ if has('gui_running')
 
 " Set visual options for console vim "
 else
+    syntax on
+    colorscheme xoria256
+    highlight Normal ctermbg=None
 endif
 
 " General Key Mappings "
@@ -225,6 +235,12 @@ function! Replace_cr_space()
     call cursor(l, c)
 endfunction
 
+" Replaces hard tabs with spaces "
+function! Fix_tabs()
+    set tabstop=4
+    retab
+endfunction
+command! -nargs=* Fixtabs call Fix_tabs()
 
 " Auto commands "
 
