@@ -1,3 +1,14 @@
+"""""""""""""""""""""""""""""
+" .vimrc
+"
+" Author: Lance Goodridge
+"""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""
+" PLUGIN INSTALLATION
+"""""""""""""""""""""""""""""
+
 " Set up Vundle "
 set nocompatible
 filetype off
@@ -5,10 +16,11 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
-" Added plugins "
+" Plugins to install "
 Plugin 'bling/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'genutils'
+Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'Raimondi/delimitMate'
@@ -19,15 +31,37 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'tclem/vim-arduino'
+Plugin 'toyamarinyon/vim-swift'
 Plugin 'tpope/vim-fugitive'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
-Plugin 'honza/vim-snippets'
-Plugin 'toyamarinyon/vim-swift'
 
 " Finish Vundle setup "
 call vundle#end()
 filetype plugin indent on
+
+
+"""""""""""""""""""""""""""""
+" PLUGIN OPTIONS
+"""""""""""""""""""""""""""""
+
+" Vim notes Options "
+let g:notes_directories = ['~/Notes', '~/git/Personal-Projects/notes']
+let g:notes_suffix = '.vn'
+let g:notes_unicode_enabled=1
+let g:notes_smart_quotes=1
+
+" Latex Options "
+let g:tex_conceal = ""
+
+" NERDTree Options "
+autocmd bufenter * if (winnr("$") == 1 &&
+\ exists("b:NERDTreeType") && b:NERDTreeType == "primary")
+\ | q | endif
+
+" Tagbar Options "
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+let g:tagbar_width=30
 
 " Airline Options "
 if has('gui_running')
@@ -36,6 +70,13 @@ if has('gui_running')
     let g:airline_powerline_fonts=1
     let g:airline#extensions#hunks#enabled = 1
 endif
+
+" Syntastic Options "
+let g:syntastic_quiet_messages={"level": "warnings"}
+let g:syntastic_quiet_messages={"type": "style"}
+let g:syntastic_warning_symbol = 'WW'
+let g:syntastic_error_symbol = 'EE'
+let g:syntastic_ocaml_checkers = ['merlin']
 
 " Neocomplete Options "
 let g:acp_enableAtStartup = 0
@@ -63,19 +104,113 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" Neosnippets options "
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+
+" Merlin Options "
+let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+
+" Vim Go Options "
+let g:go_def_mapping_enabled = 0
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
+
+
+"""""""""""""""""""""""""""""
+" VIM OPTIONS
+"""""""""""""""""""""""""""""
+
+" Set default encoding to UTF-8 "
+set encoding=utf-8
+
+" Use the system clipboard "
+set clipboard=unnamedplus
+
+" Show current position "
+set ruler
+
+" Show line numbers "
+set nu
+
+" Enable mouse use in all modes "
+set mouse=a
+
+" Set all tabs to be 4 spaces wide "
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+
+" Use soft tabs "
+set expandtab
+set smarttab
+
+" Notify user of unsaved changes when quitting "
+set confirm
+
+" Fix backspace
+set backspace=indent,eol,start
+
+" Scroll before cursor reaches bottom of the screen "
+set scrolloff=8
+
+
+"""""""""""""""""""""""""""""
+" KEY MAPPINGS
+"""""""""""""""""""""""""""""
+
+" Set control copy shortcuts "
+noremap <C-c> y
+noremap <C-x> x
+noremap <C-v> P
+
+" Enable IDE-esque plugins with control shortcuts "
+noremap <C-a> :NeoCompleteToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR>
+noremap <C-t> :TagbarToggle<CR>
+
+" Use macros with ';' "
+noremap ; @
+
+" Navigate wrapped lines like broken ones "
+nnoremap j gj
+nnoremap k gk
+
+" Set leader key to space "
+let mapleader=" "
+
+" Navigate windows with leader key "
+map <Leader>h <C-w>h
+map <Leader>j <C-w>j
+map <Leader>k <C-w>k
+map <Leader>l <C-w>l
+
+" Go-specific key mappings "
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap <Leader>c <Plug>(go-coverage)
+au Filetype go nmap <Leader>d <Plug>(go-doc)
+au Filetype go nmap <Leader>i <Plug>(go-info)
+au Filetype go nmap <Leader>v <Plug>(go-vet)
+
 " Neocomplete key mappings "
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
 endfunction
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-" Neosnippets options "
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
 
 " Neosnippets key mappings "
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -98,117 +233,24 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
-" NERDTree Options "
-autocmd bufenter * if (winnr("$") == 1 &&
-\ exists("b:NERDTreeType") && b:NERDTreeType == "primary")
-\ | q | endif
 
-" Tagbar Options "
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_width=30
+"""""""""""""""""""""""""""""
+" SAVED MACROS
+"""""""""""""""""""""""""""""
 
-" Notes Options "
-let g:notes_directories = ['~/Notes',     '~/git/Personal-Projects/notes',
-\ '~/git/Old-Projects/cos226/notes',      '~/git/Old-Projects/cos318/notes',
-\ '~/git/Personal-Projects/cos320/notes', '~/git/Old-Projects/cos326/notes',
-\ '~/git/Personal-Projects/cos398/notes', '~/git/Old-Projects/cos418/notes',
-\ '~/git/Old-Projects/cos432/notes',      '~/git/Old-Projects/cos461/notes',
-\ '~/git/Personal-Projects/cos498/notes', '~/git/Old-Projects/cos516/notes',
-\ '~/git/Personal-Projects/cos518/notes', '~/git/Personal-Projects/neu202/notes',
-\ '~/git/Old-Projects/quadcopter/notes']
-let g:notes_suffix = '.vn'
-let g:notes_unicode_enabled=1
-let g:notes_smart_quotes=1
-
-" Syntastic Options "
-let g:syntastic_quiet_messages={"level": "warnings"}
-let g:syntastic_quiet_messages={"type": "style"}
-let g:syntastic_warning_symbol = 'WW'
-let g:syntastic_error_symbol = 'EE'
-let g:syntastic_ocaml_checkers = ['merlin']
-
-" Merlin Options "
-let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-" Vim Go Options "
-let g:go_def_mapping_enabled = 0
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_types = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
-
-" Latex Options "
-let g:tex_conceal = ""
-
-" General Options  "
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set clipboard=unnamedplus
-set encoding=utf-8
-set confirm
-set smarttab
-set expandtab
-set ruler
-set nu
-
-" Fix backspace
-set backspace=indent,eol,start
-
-" Enable mouse use in all modes "
-set mouse=a
-
-" Scroll before cursor reaches bottom of the screen "
-set scrolloff=8
-
-" Set visual options for gvim "
-if has('gui_running')
-    colorscheme xoria256
-    colorscheme xuphoria
-
-" Set visual options for console vim "
-else
-    syntax on
-    colorscheme xoria256
-    highlight Normal ctermbg=None
-endif
-
-" General Key Mappings "
-let mapleader=" "
-map <C-c> y
-map <C-x> x
-map <C-v> P
-map <C-a> :NeoCompleteToggle<CR>
-map <C-n> :NERDTreeToggle<CR>
-map <C-t> :TagbarToggle<CR>
-map ; @
-map <Leader>j }
-map <Leader>k {
-map <Leader>w <C-w>
-inoremap <S-CR> <ESC>
-
-" Go-specific key mappings "
-au FileType go nmap <Leader>r <Plug>(go-run)
-au FileType go nmap <Leader>b <Plug>(go-build)
-au FileType go nmap <Leader>t <Plug>(go-test)
-au FileType go nmap <Leader>c <Plug>(go-coverage)
-au Filetype go nmap <Leader>d <Plug>(go-doc)
-au Filetype go nmap <Leader>i <Plug>(go-info)
-au Filetype go nmap <Leader>v <Plug>(go-vet)
-
-" Macros "
+" Auto format document "
 let @f = "mfgg=G'f"
+
+" Add HTML comment to line "
 let @c = "0i<!-- $a -->j"
+
+" Remove HTML comment from line "
 let @u = "0d5l$d4hj"
 
 
-" Custom Functions "
+"""""""""""""""""""""""""""""
+" CUSTOM FUNCTIONS
+"""""""""""""""""""""""""""""
 
 " Removes all trailing white space "
 function! Strip_trailing_ws()
@@ -242,15 +284,30 @@ function! Fix_tabs()
 endfunction
 command! -nargs=* Fixtabs call Fix_tabs()
 
-" Auto commands "
+
+"""""""""""""""""""""""""""""
+" AUTO COMMANDS
+"""""""""""""""""""""""""""""
 
 " Auto reload vimrc on change"
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
-"    \ | if has('gui_running') && filereadable($MYGVIMRC) | so $MYGVIMRC | endif
 augroup END
 
+
+"""""""""""""""""""""""""""""
+" COLOR / STYLE OPTIONS
+"""""""""""""""""""""""""""""
+
+syntax on
+colorscheme xoria256
+colorscheme xuphoria
+
+
+"""""""""""""""""""""""""""""
+" SYSTEM SPECIFIC OPTIONS
+"""""""""""""""""""""""""""""
 
 " MAC Only "
 nnoremap ,v :e ~/.vimrc<CR>
