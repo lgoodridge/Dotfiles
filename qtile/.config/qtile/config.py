@@ -84,7 +84,7 @@ keys = [
 	Key([alt], "Return",
 		lazy.spawn("gnome-terminal")),
 	Key([alt], "BackSpace",
-		lazy.spawn("urxvt")),
+		lazy.spawn("urxvt256c")),
 	Key([alt, shift], "d",
 		lazy.spawn("dwb")),
 	Key([alt, shift], "f",
