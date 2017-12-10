@@ -144,12 +144,18 @@ fix_gitignore() {
     git add .
 }
 
+# Location variables
+AWSSERVER='ubuntu@54.218.216.39'
+AWSKEY='-i /Users/Lance/.aws/amazon-aws-key.pem'
+
 # SSH aliases
-alias sshaws='ssh -i ~/.aws/amazon-aws-key.pem ubuntu@54.218.216.39'
+alias sshaws='ssh -X $AWSKEY $AWSSERVER'
+alias ssh518='ssh vagrant@10.8.183.105 -p 6666'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
 alias sshcycles='ssh -X lanceg@cycles.cs.princeton.edu'
 alias sshcslab='ssh -X lanceg@courselab.cs.princeton.edu'
+alias sshportal='ssh -X lanceg@portal.cs.princeton.edu'
 alias sshdave='ssh -i ~/.ssh/pcs_rsa dave@23.239.12.110'
 
 # Pretty print JSON
@@ -158,6 +164,14 @@ alias prettyjson='python -m json.tool'
 # Other helpful aliases
 alias please='sudo "$BASH" -c "$(history -p !!)"'
 alias spellcheck='aspell -t -c'
+
+# Other helpful functions
+scpaws() {
+    scp $AWSKEY -r $1 ${AWSSERVER}:$2
+}
+scp318() {
+    scp -r $1 lanceg@portal.cs.princeton.edu:/n/fs/csweb/courses/archive/fall17/cos318/lectures/
+}
 
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];

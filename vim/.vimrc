@@ -114,6 +114,7 @@ let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Vim Go Options "
+let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -132,9 +133,6 @@ let g:go_list_type = "quickfix"
 
 " Set default encoding to UTF-8 "
 set encoding=utf-8
-
-" Use the system clipboard "
-set clipboard=unnamedplus
 
 " Show current position "
 set ruler
@@ -163,15 +161,17 @@ set backspace=indent,eol,start
 " Scroll before cursor reaches bottom of the screen "
 set scrolloff=8
 
+" Use the system clipboard "
+if system('uname -s') == "Darwin\n"
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
+
 
 """""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""
-
-" Set control copy shortcuts "
-noremap <C-c> y
-noremap <C-x> x
-noremap <C-v> P
 
 " Enable IDE-esque plugins with control shortcuts "
 noremap <C-a> :NeoCompleteToggle<CR>
@@ -289,12 +289,17 @@ command! -nargs=* Fixtabs call Fix_tabs()
 " AUTO COMMANDS
 """""""""""""""""""""""""""""
 
-" Auto reload vimrc on change"
+" Auto reload vimrc on change "
 augroup myvimrc
     au!
     au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC
 augroup END
 
+" Replace tabs with spaces upon writing a Go file "
+augroup filetype_go
+    au!
+    au BufWrite *.go set expandtab | retab
+augroup END
 
 """""""""""""""""""""""""""""
 " COLOR / STYLE OPTIONS
