@@ -83,6 +83,9 @@ alias grep='egrep --color=always'
 # Alert alias for long running commands.
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Alias sudo so it respects other aliases
+alias sudo='sudo '
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
@@ -138,10 +141,31 @@ nopen() {
     gvim -c ":Note $*"
 }
 
-# Alias git hacks
+# Alias fix functions
 fix_gitignore() {
     git rm -r --cached .
     git add .
+}
+fix_venv() {
+    if [ $# -eq 1 ] && [ "$1" != "-h" ]; then
+        gfind $1 -type l -xtype l -delete
+        virtualenv $1
+    elif [ $# -eq 2 ]; then
+        gfind $1 -type l -xtype l -delete
+        virtualenv -p $2 $1
+    else
+        echo "USAGE: fix_venv ~/.virtualenvs/TARGET_VENV [python2]"
+    fi
+}
+
+# Alias PyPI functions
+upload_pypi() {
+    python setup.py sdist bdist_wheel
+    twine upload dist/* --skip-existing
+}
+upload_testpypi() {
+    python setup.py sdist bdist_wheel
+    twine upload --repository-url https://test.pypi.org/legacy/ dist/* --skip-existing
 }
 
 # Location variables
@@ -151,12 +175,20 @@ AWSKEY='-i /Users/Lance/.aws/amazon-aws-key.pem'
 # SSH aliases
 alias sshaws='ssh -X $AWSKEY $AWSSERVER'
 alias ssh518='ssh vagrant@10.8.183.105 -p 6666'
+alias ssh333='ssh -i ~/.ssh/pgrad_cs_rsa cos333@portal.cs.princeton.edu'
 alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
 alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
 alias sshcycles='ssh -X lanceg@cycles.cs.princeton.edu'
 alias sshcslab='ssh -X lanceg@courselab.cs.princeton.edu'
 alias sshportal='ssh -X lanceg@portal.cs.princeton.edu'
 alias sshdave='ssh -i ~/.ssh/pcs_rsa dave@23.239.12.110'
+alias sshmta='ssh mta@mta2.csed.io'
+alias sshapi='ssh -i ~/.aws/hireed-api-key.pem ec2-user@ec2-34-224-134-122.compute-1.amazonaws.com'
+
+# SSH alias functions
+sshapiworker() {
+    ssh -i ~/.aws/hireed-api-key.pem ec2-user@$1
+}
 
 # Pretty print JSON
 alias prettyjson='python -m json.tool'
@@ -165,12 +197,22 @@ alias prettyjson='python -m json.tool'
 alias please='sudo "$BASH" -c "$(history -p !!)"'
 alias spellcheck='aspell -t -c'
 
-# Other helpful functions
+# Temporary aliases
+alias sshacurate='ssh -i ~/.aws/acurate_key.pem ubuntu@ec2-3-15-98-66.us-east-2.compute.amazonaws.com'
+alias sshacuratetest='ssh -i ~/.aws/acurate_key.pem ubuntu@ec2-18-223-129-23.us-east-2.compute.amazonaws.com'
+
+# SCP functions
 scpaws() {
     scp $AWSKEY -r $1 ${AWSSERVER}:$2
 }
 scp318() {
-    scp -r $1 lanceg@portal.cs.princeton.edu:/n/fs/csweb/courses/archive/fall17/cos318/lectures/
+    scp -r $1 lanceg@portal.cs.princeton.edu:/n/fs/csweb/courses/archive/fall18/cos318/lectures/
+}
+scpfrom333() {
+    scp -i ~/.ssh/pgrad_cs_rsa -r cos333@portal.cs.princeton.edu:$1 $2
+}
+scpto333() {
+    scp -i ~/.ssh/pgrad_cs_rsa -r $1 cos333@portal.cs.princeton.edu:$2
 }
 
 # Modify bash prompt
@@ -191,10 +233,14 @@ LS_COLORS=$LS_COLORS:'ex=0;31:' ; export LS_COLORS
 
 # Setup virtualenv
 source "/usr/local/bin/virtualenvwrapper.sh"
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 
 # Setup Postgres
 export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
 export DATABASE_URL=postgres:///$(whoami)
+
+# Setup Python
+export PYTHONSTARTUP=~/.pythonrc
 
 # Setup Go
 export GOPATH=$HOME/Documents/Go_workpsace

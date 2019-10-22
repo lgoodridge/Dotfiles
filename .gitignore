@@ -1,5 +1,8 @@
-# Ingore .vim/bundle
+# Ignore .vim/bundle
 vim/.vim/bundle/
+
+# Ignore .vim/black
+vim/.vim/black
 
 # Ignore temp files
 ~*

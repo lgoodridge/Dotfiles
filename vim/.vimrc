@@ -23,6 +23,8 @@ Plugin 'genutils'
 Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
 Plugin 'paranoida/vim-airlineish'
+Plugin 'prettier/vim-prettier'
+Plugin 'python/black'
 Plugin 'Raimondi/delimitMate'
 Plugin 'shougo/neocomplete'
 Plugin 'shougo/neosnippet'
@@ -113,6 +115,19 @@ endif
 let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
+" Prettier Options "
+let g:prettier#config#print_width = 80
+let g:prettier#config#tab_width = 4
+let g:prettier#config#single_quote = 'false'
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#arrow_parens = 'always'
+let g:prettier#config#prose_wrap = 'preserve'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" Python Black Options "
+let g:black_linelength = 80
+
 " Vim Go Options "
 let g:go_fmt_autosave = 0
 let g:go_def_mapping_enabled = 0
@@ -152,6 +167,10 @@ set softtabstop=4
 set expandtab
 set smarttab
 
+" Open new files in split window (instead of current) "
+set splitright
+set splitbelow
+
 " Notify user of unsaved changes when quitting "
 set confirm
 
@@ -167,6 +186,9 @@ if system('uname -s') == "Darwin\n"
 else
     set clipboard=unnamedplus
 endif
+
+" Prevent quote concealment for JSON files "
+set conceallevel=0
 
 
 """""""""""""""""""""""""""""
@@ -189,10 +211,7 @@ nnoremap k gk
 let mapleader=" "
 
 " Navigate windows with leader key "
-map <Leader>h <C-w>h
-map <Leader>j <C-w>j
-map <Leader>k <C-w>k
-map <Leader>l <C-w>l
+map <Leader>w <C-w>
 
 " Go-specific key mappings "
 au FileType go nmap <Leader>r <Plug>(go-run)
@@ -301,6 +320,10 @@ augroup filetype_go
     au BufWrite *.go set expandtab | retab
 augroup END
 
+" Reformat python files with Black on save "
+" autocmd BufWritePre *.py execute ':Black'
+
+
 """""""""""""""""""""""""""""
 " COLOR / STYLE OPTIONS
 """""""""""""""""""""""""""""
@@ -317,6 +340,7 @@ colorscheme xuphoria
 " MAC Only "
 nnoremap ,v :e ~/.vimrc<CR>
 nnoremap ,b :e ~/.bashrc<CR>
+nnoremap ,f :Black<CR>
 if has('gui_running')
     set guifont=Inconsolata\ for\ Powerline:h14
 endif

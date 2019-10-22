@@ -7,3 +7,5 @@
     editor = vim
 [github]
     user = lgoodridge
+[alias]
+	unstage = reset --
