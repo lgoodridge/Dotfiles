@@ -48,7 +48,7 @@ filetype plugin indent on
 """""""""""""""""""""""""""""
 
 " Vim notes Options "
-let g:notes_directories = ['~/Notes', '~/git/Personal-Projects/notes']
+let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
@@ -112,8 +112,8 @@ if has('conceal')
 endif
 
 " Merlin Options "
-let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:opamshare = substitute(system('opam config var share'), '\n$', '', '''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Prettier Options "
 let g:prettier#config#print_width = 80
@@ -140,6 +140,7 @@ let g:go_highlight_build_constraints = 1
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+let g:go_version_warning = 0
 
 
 """""""""""""""""""""""""""""

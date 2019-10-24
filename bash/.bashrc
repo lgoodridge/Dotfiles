@@ -68,7 +68,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-# enable color support of ls and also add handy aliases
+# Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
@@ -224,36 +224,37 @@ else
 fi
 
 # Modify ls prompt
-LS_COLORS=$LS_COLORS:'di=0;36:' ; export LS_COLORS
-LS_COLORS=$LS_COLORS:'ln=0;35:' ; export LS_COLORS
-LS_COLORS=$LS_COLORS:'ex=0;31:' ; export LS_COLORS
+if [ "$(uname)" == "Darwin" ]; then
+    export CLICOLOR=1
+    export LSCOLORS=gxfxcxdxbxegedabagacad
+else
+    export LS_COLORS=$LS_COLORS:'di=0;31:ln=0;35:ex=0;31'
+fi
 
 
 ### MAC ONLY SECTION ###
 
 # Setup virtualenv
-source "/usr/local/bin/virtualenvwrapper.sh"
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
+# source "/usr/local/bin/virtualenvwrapper.sh"
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 
 # Setup Postgres
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
-export DATABASE_URL=postgres:///$(whoami)
+# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
+# export DATABASE_URL=postgres:///$(whoami)
 
 # Setup Python
-export PYTHONSTARTUP=~/.pythonrc
+# export PYTHONSTARTUP=~/.pythonrc
 
 # Setup Go
-export GOPATH=$HOME/Documents/Go_workpsace
+# export GOPATH=$HOME/Documents/Go_workpsace
 
 # Setup OCaml
-eval `opam config env`
+# eval `opam config env`
 
 # Setup ARM Toolchain
-export PATH=$PATH:/usr/local/gcc_arm/gcc-arm-none-eabi-5_4-2016q3/bin/
+# export PATH=$PATH:/usr/local/gcc_arm/gcc-arm-none-eabi-5_4-2016q3/bin/
 
 ### FEDORA ONLY SECTION ###
 
 # Helpful aliases
 # alias pdfview='evince'
-
-### UBUNTU ONLY SECTION ###
