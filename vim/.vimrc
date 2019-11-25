@@ -113,6 +113,7 @@ let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
+let g:notes_conceal_url=0
 
 
 """""""""""""""""""""""""""""
