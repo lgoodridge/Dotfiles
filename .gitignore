@@ -4,6 +4,9 @@ vim/.vim/bundle/
 # Ignore .vim/black
 vim/.vim/black
 
+# Ignore tmux .tmux/plugins
+tmux/.tmux/plugins/
+
 # Ignore temp files
 ~*
 .*.sw*

@@ -1,6 +1,4 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
 
 # If not running interactively, don't do anything
 case $- in
@@ -43,12 +41,9 @@ esac
 # Handle forced color prompt
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-    # We have color support; assume it's compliant with Ecma-48
-    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-    # a case would tend to support setf rather than setaf.)
-    color_prompt=yes
+        color_prompt=yes
     else
-    color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -86,15 +81,6 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Alias sudo so it respects other aliases
 alias sudo='sudo '
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -121,24 +107,11 @@ VENV="\$(virtualenv_info)";
 # Alias feh backround setter
 alias sbg='feh --bg-scale'
 
-# Alias vim with GUI vim in terminal mode
-# alias vim='gvim -v'
-
 # Alias cltmp to clean temp files
 cltmp() {
     find -name '*~' -delete
     find -name '\#*\#' -delete
     find -name '.*.sw*' -delete
-}
-
-# Alias vim notes commands
-alias nnew="gvim -c :Note"
-# alias nls="ls -c ~/git/Personal-Projects/notes/$*"
-ndel() {
-    find ~/git/Personal-Projects/notes/ -name "$*.vn" -delete
-}
-nopen() {
-    gvim -c ":Note $*"
 }
 
 # Alias fix functions
@@ -168,52 +141,12 @@ upload_testpypi() {
     twine upload --repository-url https://test.pypi.org/legacy/ dist/* --skip-existing
 }
 
-# Location variables
-AWSSERVER='ubuntu@54.218.216.39'
-AWSKEY='-i /Users/Lance/.aws/amazon-aws-key.pem'
-
-# SSH aliases
-alias sshaws='ssh -X $AWSKEY $AWSSERVER'
-alias ssh518='ssh vagrant@10.8.183.105 -p 6666'
-alias ssh333='ssh -i ~/.ssh/pgrad_cs_rsa cos333@portal.cs.princeton.edu'
-alias ssh318='ssh -X lanceg@labpc-proxy.cs.princeton.edu'
-alias ssh126='ssh -i ~/.ssh/pcs_rsa cos126@portal.cs.princeton.edu'
-alias sshcycles='ssh -X lanceg@cycles.cs.princeton.edu'
-alias sshcslab='ssh -X lanceg@courselab.cs.princeton.edu'
-alias sshportal='ssh -X lanceg@portal.cs.princeton.edu'
-alias sshdave='ssh -i ~/.ssh/pcs_rsa dave@23.239.12.110'
-alias sshmta='ssh mta@mta2.csed.io'
-alias sshapi='ssh -i ~/.aws/hireed-api-key.pem ec2-user@ec2-34-224-134-122.compute-1.amazonaws.com'
-
-# SSH alias functions
-sshapiworker() {
-    ssh -i ~/.aws/hireed-api-key.pem ec2-user@$1
-}
-
 # Pretty print JSON
 alias prettyjson='python -m json.tool'
 
 # Other helpful aliases
 alias please='sudo "$BASH" -c "$(history -p !!)"'
 alias spellcheck='aspell -t -c'
-
-# Temporary aliases
-alias sshacurate='ssh -i ~/.aws/acurate_key.pem ubuntu@ec2-3-15-98-66.us-east-2.compute.amazonaws.com'
-alias sshacuratetest='ssh -i ~/.aws/acurate_key.pem ubuntu@ec2-18-223-129-23.us-east-2.compute.amazonaws.com'
-
-# SCP functions
-scpaws() {
-    scp $AWSKEY -r $1 ${AWSSERVER}:$2
-}
-scp318() {
-    scp -r $1 lanceg@portal.cs.princeton.edu:/n/fs/csweb/courses/archive/fall18/cos318/lectures/
-}
-scpfrom333() {
-    scp -i ~/.ssh/pgrad_cs_rsa -r cos333@portal.cs.princeton.edu:$1 $2
-}
-scpto333() {
-    scp -i ~/.ssh/pgrad_cs_rsa -r $1 cos333@portal.cs.princeton.edu:$2
-}
 
 # Modify bash prompt
 if [ $(id -u) -eq 0 ];
@@ -232,29 +165,12 @@ else
 fi
 
 
-### MAC ONLY SECTION ###
+# External alias definitions.
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
 
-# Setup virtualenv
-# source "/usr/local/bin/virtualenvwrapper.sh"
-# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-
-# Setup Postgres
-# export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin/
-# export DATABASE_URL=postgres:///$(whoami)
-
-# Setup Python
-# export PYTHONSTARTUP=~/.pythonrc
-
-# Setup Go
-# export GOPATH=$HOME/Documents/Go_workpsace
-
-# Setup OCaml
-# eval `opam config env`
-
-# Setup ARM Toolchain
-# export PATH=$PATH:/usr/local/gcc_arm/gcc-arm-none-eabi-5_4-2016q3/bin/
-
-### FEDORA ONLY SECTION ###
-
-# Helpful aliases
-# alias pdfview='evince'
+# Source system specific bash config
+if [ -f ~/.bashrc.local ]; then
+    source ~/.bashrc.local
+fi

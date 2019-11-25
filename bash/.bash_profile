@@ -6,6 +6,3 @@ fi
 if [ -f ~/.profile ]; then
     source ~/.profile
 fi
-
-# OPAM configuration
-. /Users/Lance/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
