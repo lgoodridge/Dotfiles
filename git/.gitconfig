@@ -1,6 +1,6 @@
 [user]
-	name = Lance Goodridge
-	email = ldgoodridge95@gmail.com
+    name = Lance Goodridge
+    email = ldgoodridge95@gmail.com
 [push]
     default = simple
 [core]
@@ -8,9 +8,9 @@
 [github]
     user = lgoodridge
 [alias]
-	unstage = reset --
-	ctags = !.git/hooks/ctags
+    unstage = reset --
+    ctags = !.git/hooks/ctags
 [init]
 	templatedir = ~/.git_template
 [diff "sopsdiffer"]
-	textconv = sops -d
+    textconv = sops -d

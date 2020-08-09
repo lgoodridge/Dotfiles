@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Desc: This script has two main functions, depending on which 
+# Desc: This script has two main functions, depending on which
 #       flag is used
-# -g: Grabs all files of the specified file type from the 
+# -g: Grabs all files of the specified file type from the
 #     remote directory and copies it into the local directory
 # -p: Pushes all files of the specified file type from the local
 #     directory into remote directory

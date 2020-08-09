@@ -115,6 +115,9 @@ let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
 let g:notes_conceal_url=0
 
+" Vim notes styling "
+highlight link notesName Normal
+
 
 """""""""""""""""""""""""""""
 " VIM OPTIONS
