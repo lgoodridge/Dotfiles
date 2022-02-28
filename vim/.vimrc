@@ -20,9 +20,11 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
 Plugin 'craigemery/vim-autotag'
 Plugin 'fatih/vim-go'
+Plugin 'fisadev/vim-isort'
 Plugin 'honza/vim-snippets'
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
+Plugin 'mgedmin/python-imports.vim'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'prettier/vim-prettier'
 Plugin 'python/black'
@@ -92,7 +94,7 @@ let g:syntastic_ocaml_checkers = ['merlin']
 " Tagbar options "
 let g:tagbar_autofocus=1
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'
-let g:tagbar_width=30
+let g:tagbar_width=35
 
 " Vim Go options "
 let g:go_fmt_autosave = 0
@@ -212,8 +214,8 @@ set complete+=k~/.vim/keywords.txt
 """""""""""""""""""""""""""""
 
 " Enable IDE-esque plugins with control shortcuts "
-noremap <C-n> :NERDTreeToggle<CR>
-noremap <C-t> :TagbarToggle<CR>
+noremap <C-n> :NERDTreeToggle<CR> <c-w>=
+noremap <C-t> :TagbarToggle<CR> <c-w>=
 
 " Use macros with ';' "
 noremap ; @
@@ -245,6 +247,8 @@ au Filetype go nmap <Leader>v <Plug>(go-vet)
 
 " Python-specific key mappings "
 au FileType python noremap ,f :Black<CR>
+au FileType python noremap ,i :ImportName<CR>
+au FileType python noremap ,s :Isort<CR>
 
 
 """""""""""""""""""""""""""""
