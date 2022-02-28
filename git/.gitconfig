@@ -11,6 +11,8 @@
     unstage = reset --
     ctags = !.git/hooks/ctags
 [init]
-	templatedir = ~/.git_template
+    templatedir = ~/.git_template
 [diff "sopsdiffer"]
     textconv = sops -d
+[pull]
+    ff = only
