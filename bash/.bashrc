@@ -167,7 +167,7 @@ fi
 
 # External alias definitions.
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+    source ~/.bash_aliases
 fi
 
 # Source system specific bash config

@@ -29,6 +29,7 @@ Plugin 'paranoida/vim-airlineish'
 Plugin 'prettier/vim-prettier'
 Plugin 'python/black'
 Plugin 'Raimondi/delimitMate'
+Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
@@ -249,11 +250,15 @@ au Filetype go nmap <Leader>v <Plug>(go-vet)
 au FileType python noremap ,f :Black<CR>
 au FileType python noremap ,i :ImportName<CR>
 au FileType python noremap ,s :Isort<CR>
+au Filetype rust noremap ,f :RustFmt<CR>
 
 
 """""""""""""""""""""""""""""
 " SAVED MACROS
 """""""""""""""""""""""""""""
+
+" Activate these with the normal macro activation key "
+" For example ;f to format the document "
 
 " Auto format document "
 let @f = "mfgg=G'f"
