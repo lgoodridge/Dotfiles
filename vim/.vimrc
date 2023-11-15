@@ -27,7 +27,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mgedmin/python-imports.vim'
 Plugin 'paranoida/vim-airlineish'
 Plugin 'prettier/vim-prettier'
-Plugin 'python/black'
+Plugin 'psf/black'
 Plugin 'Raimondi/delimitMate'
 Plugin 'rust-lang/rust.vim'
 Plugin 'scrooloose/nerdcommenter'
@@ -116,10 +116,10 @@ let g:notes_directories = ['~/notes']
 let g:notes_suffix = '.vn'
 let g:notes_unicode_enabled=1
 let g:notes_smart_quotes=1
+let g:notes_conceal_bold=0
+let g:notes_conceal_code=0
+let g:notes_conceal_italic=0
 let g:notes_conceal_url=0
-
-" Vim notes styling "
-highlight link notesName Normal
 
 
 """""""""""""""""""""""""""""
@@ -334,6 +334,9 @@ augroup END
 syntax on
 colorscheme xoria256
 colorscheme xuphoria
+
+" Vim notes styling "
+highlight link notesName Normal
 
 
 """""""""""""""""""""""""""""
