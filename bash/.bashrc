@@ -161,7 +161,7 @@ if [ "$(uname)" == "Darwin" ]; then
     export CLICOLOR=1
     export LSCOLORS=gxfxcxdxbxegedabagacad
 else
-    export LS_COLORS=$LS_COLORS:'di=0;31:ln=0;35:ex=0;31'
+    export LS_COLORS=$LS_COLORS:'di=0;36:ln=0;35:ex=0;31'
 fi
 
 
